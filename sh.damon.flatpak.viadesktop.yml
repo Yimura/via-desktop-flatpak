@@ -1,0 +1,45 @@
+id: sh.damon.flatpak.viadesktop
+base: org.electronjs.Electron2.BaseApp
+base-version: "24.08"
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+command: entrypoint
+finish-args:
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # GPU acceleration if needed
+  - --device=dri
+  # USB access to keyboards
+  - --device=all
+  # Needs to talk to the network:
+  - --share=network
+  # Ensure correct HOST cursor size
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  # Dbus
+  - --socket=system-bus
+  - --socket=session-bus
+modules:
+  - name: github-binary
+    buildsystem: simple
+    sources:
+      - type: file
+        dest-name: via-desktop.deb
+        url: https://github.com/cebby2420/via-desktop/releases/download/v2025.7.28/via-desktop_2025.7.28_amd64.deb
+        sha256: fbeaceb648985ed999c829575ea0dd679adf190c04af7675edd256f6eb4a2275
+    build-commands:
+      - bsdtar -Oxf via-desktop_2025.7.28_amd64.deb 'data.tar.zst' | bsdtar -xf - --exclude='./usr/share/doc'
+      - ln -s ${FLATPAK_DEST}/lib/via-desktop/via-desktop ${FLATPAK_DEST}/bin/via-desktop
+      - install -Dm644 usr/share/pixmaps/via-desktop.png -t ${FLATPAK_DEST}/share/pixmaps/
+      - install -Dm644 usr/share/applications/via-desktop.desktop -t ${FLATPAK_DEST}/share/applications/
+      - mv usr/lib/* ${FLATPAK_DEST}/lib/
+
+  - name: startup-script
+    buildsystem: simple
+    sources:
+      - type: file
+        path: via-desktop.sh
+        sha256: 4c7516bad6493368e5f1b3133501202a559b6964280ee097049e812729f1c432
+    build-commands:
+      - install -Dm755 via-desktop.sh ${FLATPAK_DEST}/bin/entrypoint
