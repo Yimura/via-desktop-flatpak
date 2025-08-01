@@ -7,19 +7,26 @@ sdk: org.freedesktop.Sdk
 command: entrypoint
 separate-locales: false
 finish-args:
-  # X11 + XShm access
+  # X11 Performance (?)
   - --share=ipc
+  # X11
   - --socket=x11
-  # Audio Access
-  - --socket=pulseaudio
+  # Access to wayland
+  - --socket=wayland
   # GPU acceleration if needed
   - --device=dri
-  # USB access to keyboards
+  # Secrets storage
+  - --talk-name=org.freedesktop.secrets
+  # USB access to keyboards (hidraw devices need to be accessed)
   - --device=all
-  # Needs to talk to the network:
+  # Download new keyboard definitions
   - --share=network
   # Ensure correct HOST cursor size
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  # Control shell behaviour
+  - --env=PASSWORD_STORE=basic
+  - --env=DISABLE_GPU=0
+  - --env=DISABLE_GPU_SANDBOX=0
 modules:
   - name: github-binary
     buildsystem: simple
@@ -47,7 +54,7 @@ modules:
     sources:
       - type: file
         path: via-desktop.sh
-        sha256: 4c7516bad6493368e5f1b3133501202a559b6964280ee097049e812729f1c432
+        sha256: 320640e2011e632a37595b4e2ccf39013a660c03711f09c1e86db242b3e67edd
     build-commands:
       - install -Dm755 via-desktop.sh ${FLATPAK_DEST}/bin/entrypoint
 
