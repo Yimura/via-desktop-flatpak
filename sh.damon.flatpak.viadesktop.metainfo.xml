@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>sh.damon.flatpak.viadesktop</id>
+  
+  <name>Via Desktop</name>
+  <summary>Configure your QMK Keyboards</summary>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  
+  <description>
+    <p>
+      VIA is a powerful, open-source web-based interface for configuring your QMK-powered mechanical keyboard.
+    </p>
+    <p>
+      It allows you to customize your keymaps, create macros, and adjust RGB settings (if it has RGB) on the fly, without needing to recompile your keyboard&apos;s firmware. This makes keyboard customization easier and more accessible for everyone.
+    </p>
+  </description>
+  <launchable type="desktop-id">sh.damon.flatpak.viadesktop.desktop</launchable>
+  <description>
+    <p>
+        VIA is a powerful, open-source web-based interface for configuring your QMK-powered mechanical keyboard. 
+    </p>
+    <p>
+        It allows you to customize your keymaps, create macros, and adjust RGB settings (if it has RGB) on the fly, without needing to recompile your keyboard's firmware. This makes keyboard customization easier and more accessible for everyone.
+    </p>
+  </description>
+  <launchable type="desktop-id">sh.damon.flatpak.viadesktop.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://caniusevia.com/assets/images/via_2d-3ee875e57a1b2eefb6ec93fb96f52d8d.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://caniusevia.com/assets/images/via_3d-2824222fb77634a9b1b4537e4c8537e8.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://caniusevia.com/assets/images/macro_recorder-580aea2fd7812b514d60fb9a67ce48bd.png</image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <id>via-desktop.desktop</id>
+  </provides>
+  <releases>
+    <release version="v2025.7.28" date="2025-07-28">
+      <description></description>
+    </release>
+  </releases>
+</component>
