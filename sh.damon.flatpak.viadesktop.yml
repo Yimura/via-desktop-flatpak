@@ -32,11 +32,10 @@ modules:
     buildsystem: simple
     sources:
       - type: file
-        dest-name: via-desktop.deb
-        url: https://github.com/cebby2420/via-desktop/releases/download/v2025.7.28/via-desktop_2025.7.28_amd64.deb
-        sha256: fbeaceb648985ed999c829575ea0dd679adf190c04af7675edd256f6eb4a2275
+        url: https://github.com/cebby2420/via-desktop/releases/download/v2025.8.2/via-desktop_2025.8.2_amd64.deb
+        sha256: 8838ef674e6235a2e8afbb0295e3d044fed2ea23d320daaf8e0f9ac87efe1578
     build-commands:
-      - bsdtar -Oxf via-desktop_2025.7.28_amd64.deb 'data.tar.zst' | bsdtar -xf - --exclude='./usr/share/doc'
+      - bsdtar -Oxf via-desktop_2025.8.2_amd64.deb 'data.tar.zst' | bsdtar -xf - --exclude='./usr/share/doc'
       - ln -s ${FLATPAK_DEST}/lib/via-desktop/via-desktop "${FLATPAK_DEST}/bin/via-desktop"
       - install -Dm644 usr/share/pixmaps/via-desktop.png "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png"
       - install -Dm644 usr/share/applications/via-desktop.desktop "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
