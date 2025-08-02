@@ -13,6 +13,8 @@ finish-args:
   - --socket=x11
   # Access to wayland
   - --socket=wayland
+  # Audio for keyboard key testing feedback
+  - --socket=pulseaudio
   # GPU acceleration if needed
   - --device=dri
   # Secrets storage
