@@ -30,13 +30,22 @@ finish-args:
   - --env=DISABLE_GPU=0
   - --env=DISABLE_GPU_SANDBOX=0
 modules:
-  - name: github-binary
+  - name: via-desktop
     buildsystem: simple
     sources:
       - type: file
         url: https://github.com/cebby2420/via-desktop/releases/download/v2025.8.2/via-desktop_2025.8.2_amd64.deb
         sha256: 8838ef674e6235a2e8afbb0295e3d044fed2ea23d320daaf8e0f9ac87efe1578
+      - type: file
+        path: via-desktop.sh
+        sha256: 320640e2011e632a37595b4e2ccf39013a660c03711f09c1e86db242b3e67edd
+      - type: file
+        path: sh.damon.flatpak.viadesktop.metainfo.xml
     build-commands:
+      - install -Dm755 via-desktop.sh ${FLATPAK_DEST}/bin/entrypoint
+
+      - install -Dm644 "${FLATPAK_ID}.metainfo.xml" "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
+
       - bsdtar -Oxf via-desktop_2025.8.2_amd64.deb 'data.tar.zst' | bsdtar -xf - --exclude='./usr/share/doc'
       - ln -s ${FLATPAK_DEST}/lib/via-desktop/via-desktop "${FLATPAK_DEST}/bin/via-desktop"
       - install -Dm644 usr/share/pixmaps/via-desktop.png "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png"
@@ -49,20 +58,3 @@ modules:
       - desktop-file-edit --set-key=Name --set-value='Via Desktop' "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - desktop-file-edit --set-key=Comment --set-value='VIA is a powerful, open-source web-based interface for configuring your QMK-powered mechanical keyboard. ' "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - patch-desktop-filename "${FLATPAK_DEST}/lib/via-desktop/resources/app.asar"
-
-  - name: startup-script
-    buildsystem: simple
-    sources:
-      - type: file
-        path: via-desktop.sh
-        sha256: 320640e2011e632a37595b4e2ccf39013a660c03711f09c1e86db242b3e67edd
-    build-commands:
-      - install -Dm755 via-desktop.sh ${FLATPAK_DEST}/bin/entrypoint
-
-  - name: metainfo
-    buildsystem: simple
-    sources:
-      - type: file
-        path: sh.damon.flatpak.viadesktop.metainfo.xml
-    build-commands:
-      - install -Dm644 "${FLATPAK_ID}.metainfo.xml" "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
