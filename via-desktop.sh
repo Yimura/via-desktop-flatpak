@@ -17,7 +17,7 @@ basic | gnome-libsecret | kwallet | kwallet5 | kwallet6)
 esac
 
 if [[ "${ELECTRON_OZONE_PLATFORM_HINT}" == "auto" || "${ELECTRON_OZONE_PLATFORM_HINT}" == "wayland" ]]; then
-    EXTRA_ARGS+=("--enable-wayland-ime" "--wayland-text-input-version=3")
+    EXTRA_ARGS+=("--enable-features=UseOzonePlatform,WaylandWindowDecorations,VaapiVideoDecodeLinuxGL" "--ozone-platform=wayland")
 fi
 
 if [[ "${DISABLE_GPU}" -eq 1 ]]; then
@@ -33,4 +33,4 @@ if [[ "${DISABLE_GPU_SANDBOX}" -eq 1 ]]; then
 fi
 
 export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
-exec zypak-wrapper via-desktop "${EXTRA_ARGS[@]}" "$@"
+exec zypak-wrapper /app/lib/via-desktop/via-desktop "${EXTRA_ARGS[@]}" "$@"

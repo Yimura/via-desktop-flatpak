@@ -7,10 +7,8 @@ sdk: org.freedesktop.Sdk
 command: entrypoint
 separate-locales: false
 finish-args:
-  # X11 Performance (?)
-  - --share=ipc
   # X11
-  - --socket=x11
+  - --socket=fallback-x11
   # Access to wayland
   - --socket=wayland
   # Audio for keyboard key testing feedback
@@ -29,6 +27,7 @@ finish-args:
   - --env=PASSWORD_STORE=basic
   - --env=DISABLE_GPU=0
   - --env=DISABLE_GPU_SANDBOX=0
+  - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 modules:
   - name: via-desktop
     buildsystem: simple
@@ -38,7 +37,7 @@ modules:
         sha256: 8838ef674e6235a2e8afbb0295e3d044fed2ea23d320daaf8e0f9ac87efe1578
       - type: file
         path: via-desktop.sh
-        sha256: 320640e2011e632a37595b4e2ccf39013a660c03711f09c1e86db242b3e67edd
+        sha256: 97a1e6cfb92591c0807fd7bc0cae58fd8a05bbde20e1f49c71788204f3552deb
       - type: file
         path: sh.damon.flatpak.viadesktop.metainfo.xml
     build-commands:
@@ -47,7 +46,6 @@ modules:
       - install -Dm644 "${FLATPAK_ID}.metainfo.xml" "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
 
       - bsdtar -Oxf via-desktop_2025.8.2_amd64.deb 'data.tar.zst' | bsdtar -xf - --exclude='./usr/share/doc'
-      - ln -s ${FLATPAK_DEST}/lib/via-desktop/via-desktop "${FLATPAK_DEST}/bin/via-desktop"
       - install -Dm644 usr/share/pixmaps/via-desktop.png "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png"
       - install -Dm644 usr/share/applications/via-desktop.desktop "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - mv usr/lib/* ${FLATPAK_DEST}/lib/
