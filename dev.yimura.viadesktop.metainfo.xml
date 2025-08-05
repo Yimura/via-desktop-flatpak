@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>sh.damon.flatpak.viadesktop</id>
+  <id>dev.yimura.viadesktop</id>
   
   <name>Via Desktop</name>
   <summary>Configure your QMK Keyboards</summary>
@@ -16,7 +16,7 @@
       It allows you to customize your keymaps, create macros, and adjust RGB settings (if it has RGB) on the fly, without needing to recompile your keyboard&apos;s firmware. This makes keyboard customization easier and more accessible for everyone.
     </p>
   </description>
-  <launchable type="desktop-id">sh.damon.flatpak.viadesktop.desktop</launchable>
+  <launchable type="desktop-id">dev.yimura.viadesktop.desktop</launchable>
   <description>
     <p>
         VIA is a powerful, open-source web-based interface for configuring your QMK-powered mechanical keyboard. 
@@ -25,7 +25,7 @@
         It allows you to customize your keymaps, create macros, and adjust RGB settings (if it has RGB) on the fly, without needing to recompile your keyboard's firmware. This makes keyboard customization easier and more accessible for everyone.
     </p>
   </description>
-  <launchable type="desktop-id">sh.damon.flatpak.viadesktop.desktop</launchable>
+  <launchable type="desktop-id">dev.yimura.viadesktop.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://caniusevia.com/assets/images/via_2d-3ee875e57a1b2eefb6ec93fb96f52d8d.png</image>

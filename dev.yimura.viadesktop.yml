@@ -1,4 +1,4 @@
-id: sh.damon.flatpak.viadesktop
+id: dev.yimura.viadesktop
 base: org.electronjs.Electron2.BaseApp
 base-version: "24.08"
 runtime: org.freedesktop.Platform
@@ -17,7 +17,7 @@ finish-args:
   - --device=dri
   # Secrets storage
   - --talk-name=org.freedesktop.secrets
-  # USB access to keyboards (hidraw devices need to be accessed)
+  # USB access to keyboards (hidraw devices need to be accessed, --device=usb did not work)
   - --device=all
   # Download new keyboard definitions
   - --share=network
@@ -34,12 +34,12 @@ modules:
     sources:
       - type: file
         url: https://github.com/cebby2420/via-desktop/releases/download/v2025.8.2/via-desktop_2025.8.2_amd64.deb
-        sha256: 8838ef674e6235a2e8afbb0295e3d044fed2ea23d320daaf8e0f9ac87efe1578
+        sha256: 1b56154b09304631b40000459eab9465015200c964b9e514d85345888b1e4a38
       - type: file
         path: via-desktop.sh
         sha256: 97a1e6cfb92591c0807fd7bc0cae58fd8a05bbde20e1f49c71788204f3552deb
       - type: file
-        path: sh.damon.flatpak.viadesktop.metainfo.xml
+        path: dev.yimura.viadesktop.metainfo.xml
     build-commands:
       - install -Dm755 via-desktop.sh ${FLATPAK_DEST}/bin/entrypoint
 
